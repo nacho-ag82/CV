@@ -1,0 +1,97 @@
+{
+  "name": "Ignacio Aguirre - Portfolio",
+  "short_name": "Ignacio Aguirre",
+  "description": "Desarrollador Full Stack con especialización en JavaScript, Angular, Laravel y liderazgo de equipos. Tech Lead Junior, Analista Técnico y Consultor Tecnológico.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a",
+  "lang": "es-ES",
+  "dir": "ltr",
+  "categories": ["business", "productivity"],
+  "screenshots": [
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230f172a' width='192' height='192'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='96' font-weight='bold' fill='%2338bdf8' font-family='system-ui'>IA</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230f172a' width='192' height='192'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='96' font-weight='bold' fill='%2338bdf8' font-family='system-ui'>IA</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%230f172a' width='512' height='512'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='256' font-weight='bold' fill='%2338bdf8' font-family='system-ui'>IA</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Email",
+      "short_name": "Email",
+      "description": "Enviar email a Ignacio",
+      "url": "mailto:nachoag82@gmail.com",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect fill='%2338bdf8' width='96' height='96' rx='20'/><path fill='%230f172a' d='M24 32h48c4.4 0 8 3.6 8 8v32c0 4.4-3.6 8-8 8H24c-4.4 0-8-3.6-8-8V40c0-4.4 3.6-8 8-8zm24 16L24 48v24h48V48L48 48z'/></svg>",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Teléfono",
+      "short_name": "Llamar",
+      "description": "Llamar a Ignacio",
+      "url": "tel:+34607573058",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect fill='%2338bdf8' width='96' height='96' rx='20'/><path fill='%230f172a' d='M32 24c3.3 0 6.4 1.3 8.6 3.6l20.1 20.1c2.3 2.3 3.6 5.3 3.6 8.6 0 3.3-1.3 6.4-3.6 8.6L38 77.4c-2.3 2.3-5.3 3.6-8.6 3.6-3.3 0-6.4-1.3-8.6-3.6L2 56c-2.3-2.3-3.6-5.3-3.6-8.6 0-3.3 1.3-6.4 3.6-8.6l20-20c2.2-2.3 5.3-3.6 8.6-3.6zm0 16l-8 8 8 8 8-8-8-8z'/></svg>",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Experiencia",
+      "short_name": "Experiencia",
+      "description": "Ver experiencia profesional",
+      "url": "/#experience",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect fill='%2338bdf8' width='96' height='96' rx='20'/><path fill='%230f172a' d='M20 28h56c4.4 0 8 3.6 8 8v40c0 4.4-3.6 8-8 8H20c-4.4 0-8-3.6-8-8V36c0-4.4 3.6-8 8-8zm8-8h40c2.2 0 4 1.8 4 4v4H24v-4c0-2.2 1.8-4 4-4zm32 40H36v8h24v-8z'/></svg>",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "mailto:nachoag82@gmail.com",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "subject": "Oportunidad profesional"
+    }
+  }
+}
