@@ -245,6 +245,12 @@ body {
 }
 
 /* Download Link */
+.downloads-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .download-link {
   display: inline-flex;
   align-items: center;
@@ -268,6 +274,16 @@ body {
 
 .download-link:active {
   transform: translateX(2px);
+}
+
+@media (max-width: 640px) {
+  .downloads-container {
+    flex-direction: column;
+  }
+
+  .download-link {
+    justify-content: center;
+  }
 }
 
 /* ===== 6. LISTAS Y TAGS ===== */

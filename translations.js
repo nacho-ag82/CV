@@ -88,6 +88,7 @@ const translations = {
     // Downloads
     downloads_title: 'Descargas',
     recommendation_letter: 'Carta de Recomendación',
+    cv_download: 'CV Actualizado',
   },
   en: {
     // Preloader
@@ -173,6 +174,7 @@ const translations = {
     // Downloads
     downloads_title: 'Downloads',
     recommendation_letter: 'Letter of Recommendation',
+    cv_download: 'Updated CV',
   }
 };
 
