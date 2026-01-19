@@ -1985,3 +1985,65 @@ body {
     min-height: auto;
   }
 }
+
+/* ===== 17. LANGUAGE SWITCHER ===== */
+.lang-switcher {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 999;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--card-bg);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang-switcher:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.lang-switcher:active {
+  transform: scale(0.95);
+}
+
+.lang-current {
+  display: inline-block;
+  transition: transform 0.3s ease-out;
+}
+
+.lang-switcher:active .lang-current {
+  transform: rotate(180deg);
+}
+
+[data-theme="light"] .lang-switcher {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 640px) {
+  .lang-switcher {
+    width: 45px;
+    height: 45px;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media print {
+  .lang-switcher {
+    display: none;
+  }
+}

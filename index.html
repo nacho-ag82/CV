@@ -14,6 +14,9 @@
     const stored = localStorage.getItem('theme');
     const os = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', stored || os);
+    const storedLang = localStorage.getItem('language') || 'es';
+    document.documentElement.lang = storedLang;
+    document.documentElement.setAttribute('data-lang', storedLang);
     document.documentElement.classList.remove('no-js');
   </script>
 </head>
@@ -21,15 +24,19 @@
 <body>
   <div id="preloader" class="preloader" aria-hidden="false">
     <div class="spinner"></div>
-    <div class="preloader-text">Cargando portfolio…</div>
+    <div class="preloader-text" data-i18n="loading">Cargando portfolio…</div>
   </div>
+
+  <button id="lang-switcher" class="lang-switcher" aria-label="Cambiar idioma" title="Cambiar idioma">
+    <span class="lang-current" data-lang-es="ES" data-lang-en="EN">ES</span>
+  </button>
 
   <header class="hero">
     <div class="hero-content">
       <img src="foto_perfil.jpg" alt="Ignacio Aguirre" class="profile-photo">
       <h1>Ignacio Aguirre</h1>
-      <h2>Desarrollador Full Stack · Analista Técnico · Tech Lead Junior</h2>
-      <p>
+      <h2 data-i18n="hero_subtitle">Desarrollador Full Stack · Analista Técnico · Tech Lead Junior</h2>
+      <p data-i18n="hero_description">
         Desarrollador con alta especialización en JavaScript, experiencia en Angular, Laravel y liderazgo de equipos.
         Perfil híbrido entre desarrollo, análisis funcional y consultoría tecnológica.
       </p>
@@ -40,20 +47,20 @@
         <span aria-hidden="true">·</span>
         <a href="https://www.linkedin.com/in/aguirre-garcía-ignacio-37a18333a" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <span aria-hidden="true">·</span>
-        <span>Sevilla, España</span>
+        <span data-i18n="location">Sevilla, España</span>
       </div>
     </div>
   </header>
 
   <main class="container">
     <section id="about" class="card">
-      <h3>Sobre mí</h3>
-      <p>
+      <h3 data-i18n="about_title">Sobre mí</h3>
+      <p data-i18n="about_description1">
         Soy desarrollador Full Stack con experiencia en proyectos reales, liderazgo de equipos y toma de decisiones
         técnicas en entornos front-end y back-end. He trabajado con Angular, Laravel, Java, bases de datos y
         accesibilidad, además de entrenar modelos de IA a nivel funcional y técnico.
       </p>
-      <p>
+      <p data-i18n="about_description2">
         Busco roles de mayor responsabilidad como <strong>Tech Lead Junior</strong>, <strong>Analista Técnico</strong> o
         <strong>Consultor Tecnológico</strong>, donde pueda combinar mis habilidades técnicas con mi experiencia
         coordinando personas y entendiendo las necesidades del negocio.
@@ -62,7 +69,7 @@
 
     <section id="skills" class="card two-columns">
       <div>
-        <h3>Habilidades técnicas</h3>
+        <h3 data-i18n="skills_technical">Habilidades técnicas</h3>
         <ul class="tag-list">
           <li>JavaScript (9/10)</li>
           <li>Angular</li>
@@ -78,7 +85,7 @@
         </ul>
       </div>
       <div>
-        <h3>Habilidades blandas</h3>
+        <h3 data-i18n="skills_soft">Habilidades blandas</h3>
         <ul class="tag-list">
           <li>Liderazgo de equipos</li>
           <li>Comunicación efectiva</li>
@@ -94,7 +101,7 @@
     </section>
 
     <section id="experience" class="card">
-      <h3>Experiencia profesional</h3>
+      <h3 data-i18n="experience_title">Experiencia profesional</h3>
       <div class="job-figure-carousel" role="tablist">
         <button class="job-figure" data-target="0" role="tab" aria-selected="true" aria-controls="job-0">
           <span class="figure-icon" aria-hidden="true">
@@ -131,46 +138,46 @@
       <div class="job-articles">
         <article class="job" id="job-0" aria-hidden="false" data-visible="true">
           <div class="job-header">
-            <h4>Instalador de Sistemas · YMANT</h4>
-            <time datetime="2025-09">Sept 2025</time> – <span>Actualidad</span>
+            <h4 data-i18n="job_0_title">Instalador de Sistemas · YMANT</h4>
+            <time datetime="2025-09">Sept 2025</time> – <time datetime="2025-09">Dic 2025</time>
           </div>
-          <p class="job-location">Sevilla, España</p>
+          <p class="job-location" data-i18n="job_0_location">Sevilla, España</p>
           <ul>
-            <li>Instalación y configuración de sistemas electrónicos en centros educativos.</li>
-            <li>Coordinación de equipos de hasta 10 técnicos en despliegues simultáneos.</li>
-            <li>Gestión logística y optimización de tiempos y recursos.</li>
-            <li>Resolución de incidencias técnicas y documentación de procesos.</li>
+            <li data-i18n="job_0_item1">Instalación y configuración de sistemas electrónicos en centros educativos.</li>
+            <li data-i18n="job_0_item2">Coordinación de equipos de hasta 10 técnicos en despliegues simultáneos.</li>
+            <li data-i18n="job_0_item3">Gestión logística y optimización de tiempos y recursos.</li>
+            <li data-i18n="job_0_item4">Resolución de incidencias técnicas y documentación de procesos.</li>
           </ul>
         </article>
 
         <article class="job" id="job-1" aria-hidden="true" data-visible="false">
           <div class="job-header">
-            <h4>Entrenador de IA · Outlier</h4>
-            <time datetime="2025-03">Mar 2025</time> – <time datetime="2025-09">Sept 2025</time>
+            <h4 data-i18n="job_1_title">Entrenador de IA · Outlier</h4>
+            <time datetime="2025-03">Mar 2025</time> – <span data-i18n="job_1_current">actualidad</span>
           </div>
-          <p class="job-location">Remoto</p>
+          <p class="job-location" data-i18n="job_1_location">Remoto</p>
           <ul>
-            <li>Entrenamiento de modelos de IA en SQL, Java, PHP, Kotlin, C#, JavaScript, TypeScript, HTML, CSS,
+            <li data-i18n="job_1_item1">Entrenamiento de modelos de IA en SQL, Java, PHP, Kotlin, C#, JavaScript, TypeScript, HTML, CSS,
               Angular, Laravel y Bootstrap.</li>
-            <li>Validación de calidad y coherencia técnica en datasets.</li>
-            <li>Diseño de prompts y análisis funcional para mejorar el rendimiento de modelos.</li>
-            <li>Trabajo en entornos ágiles orientados a precisión y consistencia.</li>
+            <li data-i18n="job_1_item2">Validación de calidad y coherencia técnica en datasets.</li>
+            <li data-i18n="job_1_item3">Diseño de prompts y análisis funcional para mejorar el rendimiento de modelos.</li>
+            <li data-i18n="job_1_item4">Trabajo en entornos ágiles orientados a precisión y consistencia.</li>
           </ul>
         </article>
 
         <article class="job" id="job-2" aria-hidden="true" data-visible="false">
           <div class="job-header">
-            <h4>Desarrollador Web / Analista Funcional · Quantum Solutions</h4>
+            <h4 data-i18n="job_2_title">Desarrollador Web / Analista Funcional · Quantum Solutions</h4>
             <time datetime="2025-03">Mar 2025</time> – <time datetime="2025-07">Jul 2025</time>
           </div>
-          <p class="job-location">Sevilla, España</p>
+          <p class="job-location" data-i18n="job_2_location">Sevilla, España</p>
           <ul>
-            <li>Desarrollo full stack en proyectos web corporativos.</li>
-            <li>Liderazgo de un equipo de 3 desarrolladores front-end.</li>
-            <li>Toma de decisiones técnicas en arquitectura front.</li>
-            <li>Desarrollo de videojuegos en JavaScript, optimización de performance y accesibilidad.</li>
-            <li>Evolutivos, mantenimiento y diseño responsive.</li>
-            <li>Back-end en Java con foco en calidad de código.</li>
+            <li data-i18n="job_2_item1">Desarrollo full stack en proyectos web corporativos.</li>
+            <li data-i18n="job_2_item2">Liderazgo de un equipo de 3 desarrolladores front-end.</li>
+            <li data-i18n="job_2_item3">Toma de decisiones técnicas en arquitectura front.</li>
+            <li data-i18n="job_2_item4">Desarrollo de videojuegos en JavaScript, optimización de performance y accesibilidad.</li>
+            <li data-i18n="job_2_item5">Evolutivos, mantenimiento y diseño responsive.</li>
+            <li data-i18n="job_2_item6">Back-end en Java con foco en calidad de código.</li>
           </ul>
         </article>
       </div>
@@ -178,33 +185,32 @@
 
     <section id="extra-experience" class="card two-columns">
       <div>
-        <h3>Experiencia adicional</h3>
+        <h3 data-i18n="extra_experience_title">Experiencia adicional</h3>
         <ul>
-          <li><strong>Leñador:</strong> disciplina, resistencia, seguridad en entornos de riesgo.</li>
-          <li><strong>Camarero:</strong> atención al cliente, multitarea, trabajo bajo presión.</li>
-          <li><strong>Repartidor:</strong> organización, eficiencia, responsabilidad.</li>
-          <li><strong>Comercial:</strong> negociación, persuasión, orientación a resultados.</li>
-          <li><strong>Talent Acquisition:</strong> selección de perfiles técnicos, entrevistas, evaluación de talento.
-          </li>
+          <li><strong data-i18n="leñador">Leñador:</strong> <span data-i18n="leñador_desc">disciplina, resistencia, seguridad en entornos de riesgo.</span></li>
+          <li><strong data-i18n="camarero">Camarero:</strong> <span data-i18n="camarero_desc">atención al cliente, multitarea, trabajo bajo presión.</span></li>
+          <li><strong data-i18n="repartidor">Repartidor:</strong> <span data-i18n="repartidor_desc">organización, eficiencia, responsabilidad.</span></li>
+          <li><strong data-i18n="comercial">Comercial:</strong> <span data-i18n="comercial_desc">negociación, persuasión, orientación a resultados.</span></li>
+          <li><strong data-i18n="talent_acquisition">Talent Acquisition:</strong> <span data-i18n="talent_acquisition_desc">selección de perfiles técnicos, entrevistas, evaluación de talento.</span></li>
         </ul>
       </div>
       <div>
-        <h3>Educación</h3>
+        <h3 data-i18n="education_title">Educación</h3>
         <ul class="education-list">
-          <li><strong>Desarrollo de Aplicaciones Web</strong><br>IES Velázquez · 2025</li>
-          <li><strong>Bachillerato</strong><br>IES San Isidoro · 2020</li>
+          <li><strong data-i18n="education_item1">Desarrollo de Aplicaciones Web</strong><br>IES Velázquez · 2025</li>
+          <li><strong data-i18n="education_item2">Bachillerato</strong><br>IES San Isidoro · 2020</li>
         </ul>
-        <h3>Idiomas</h3>
+        <h3 data-i18n="languages_title">Idiomas</h3>
         <ul class="language-list">
-          <li><strong>Español:</strong> Nativo</li>
-          <li><strong>Inglés:</strong> Fluido</li>
+          <li><strong data-i18n="language_spanish">Español:</strong> <span data-i18n="level_native">Nativo</span></li>
+          <li><strong data-i18n="language_english">Inglés:</strong> <span data-i18n="level_fluent">Fluido</span></li>
         </ul>
       </div>
     </section>
 
     <section id="objective" class="card">
-      <h3>Objetivo profesional</h3>
-      <p>
+      <h3 data-i18n="objective_title">Objetivo profesional</h3>
+      <p data-i18n="objective_description">
         Acceder a un rol híbrido de <strong>Tech Lead Junior</strong>, <strong>Analista Técnico</strong> o
         <strong>Consultor Tecnológico</strong>, donde pueda combinar mis capacidades técnicas, mi experiencia liderando
         equipos y mi visión funcional para aportar valor en proyectos de gran escala, preferiblemente en consultoras o
@@ -217,25 +223,25 @@
     <div class="slides">
       <div class="slide" data-bg="images/slide1.webp" data-loaded="false">
         <div class="slide-content">
-          <h3>Proyectos Front-end</h3>
-          <p>Interfaces accesibles y rendimiento optimizado.</p>
+          <h3 data-i18n="slide1_title">Proyectos Front-end</h3>
+          <p data-i18n="slide1_desc">Interfaces accesibles y rendimiento optimizado.</p>
         </div>
       </div>
       <div class="slide" data-bg="images/slide2.webp" data-loaded="false">
         <div class="slide-content">
-          <h3>Arquitectura y liderazgo</h3>
-          <p>Decisiones técnicas y coordinación de equipos.</p>
+          <h3 data-i18n="slide2_title">Arquitectura y liderazgo</h3>
+          <p data-i18n="slide2_desc">Decisiones técnicas y coordinación de equipos.</p>
         </div>
       </div>
       <div class="slide" data-bg="images/slide3.webp" data-loaded="false">
         <div class="slide-content">
-          <h3>Machine Learning</h3>
-          <p>Entrenamiento y validación de modelos IA.</p>
+          <h3 data-i18n="slide3_title">Machine Learning</h3>
+          <p data-i18n="slide3_desc">Entrenamiento y validación de modelos IA.</p>
         </div>
       </div>
     </div>
-    <button class="showcase-prev" aria-label="Anterior">‹</button>
-    <button class="showcase-next" aria-label="Siguiente">›</button>
+    <button class="showcase-prev" aria-label="Anterior" data-i18n-attr="aria-label:carousel_prev">‹</button>
+    <button class="showcase-next" aria-label="Siguiente" data-i18n-attr="aria-label:carousel_next">›</button>
     <div class="showcase-indicators" role="tablist">
       <button data-slide="0" aria-label="Slide 1" class="active"></button>
       <button data-slide="1" aria-label="Slide 2"></button>
@@ -249,6 +255,7 @@
 
   <div id="watermark" class="watermark" aria-hidden="true">Ignacio Aguirre</div>
 
+  <script src="translations.js" defer></script>
   <script src="main.js" defer></script>
 </body>
 
