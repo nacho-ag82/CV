@@ -84,6 +84,10 @@ const translations = {
     slide3_desc: 'Entrenamiento y validación de modelos IA.',
     carousel_prev: 'Anterior',
     carousel_next: 'Siguiente',
+    
+    // Downloads
+    downloads_title: 'Descargas',
+    recommendation_letter: 'Carta de Recomendación',
   },
   en: {
     // Preloader
@@ -165,6 +169,10 @@ const translations = {
     slide3_desc: 'Training and validation of AI models.',
     carousel_prev: 'Previous',
     carousel_next: 'Next',
+    
+    // Downloads
+    downloads_title: 'Downloads',
+    recommendation_letter: 'Letter of Recommendation',
   }
 };
 
