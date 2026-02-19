@@ -89,6 +89,13 @@ const translations = {
     downloads_title: 'Descargas',
     recommendation_letter: 'Carta de Recomendación',
     cv_download: 'CV Actualizado',
+    
+    // IA Module
+    ai_module_title: 'Asistente IA',
+    ai_module_description: 'Haz preguntas sobre mi perfil, experiencia o habilidades.',
+    ai_greeting: '¡Hola! Soy el asistente de IA. Puedo responder preguntas sobre la experiencia y habilidades de Ignacio. ¿Qué deseas saber?',
+    ai_placeholder: 'Escribe tu pregunta...',
+    ai_send: 'Enviar'
   },
   en: {
     // Preloader
@@ -175,6 +182,13 @@ const translations = {
     downloads_title: 'Downloads',
     recommendation_letter: 'Letter of Recommendation',
     cv_download: 'Updated CV',
+    
+    // IA Module
+    ai_module_title: 'AI Assistant',
+    ai_module_description: 'Ask questions about my profile, experience or skills.',
+    ai_greeting: 'Hi! I\'m the AI assistant. I can answer questions about Ignacio\'s experience and skills. What would you like to know?',
+    ai_placeholder: 'Type your question...',
+    ai_send: 'Send'
   }
 };
 

@@ -218,6 +218,24 @@
       </p>
     </section>
 
+    <section id="ai-module" class="card">
+      <h3 data-i18n="ai_module_title">Asistente IA</h3>
+      <p data-i18n="ai_module_description">Haz preguntas sobre mi perfil, experiencia o habilidades.</p>
+      <div class="ai-container">
+        <div class="ai-chat" id="ai-chat">
+          <div class="ai-message ai-bot">
+            <span data-i18n="ai_greeting">¡Hola! Soy el asistente de IA. Puedo responder preguntas sobre la experiencia y habilidades de Ignacio. ¿Qué deseas saber?</span>
+          </div>
+        </div>
+        <div class="ai-input-group">
+          <input type="text" id="ai-input" class="ai-input" placeholder="Escribe tu pregunta..." data-i18n-attr="placeholder:ai_placeholder">
+          <button id="ai-send" class="ai-send-btn" aria-label="Enviar" data-i18n-attr="aria-label:ai_send">
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
     <section id="downloads" class="card">
       <h3 data-i18n="downloads_title">Descargas</h3>
       <div class="downloads-container">
@@ -268,6 +286,7 @@
   <div id="watermark" class="watermark" aria-hidden="true">Ignacio Aguirre</div>
 
   <script src="translations.js" defer></script>
+  <script src="ai-module.js" defer></script>
   <script src="main.js" defer></script>
 </body>
 
