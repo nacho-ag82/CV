@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       // Intentar conectar con el servidor
-      const response = await fetch('/api/chat', {
+      const response = await fetch('https://cv-2uob.onrender.com/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

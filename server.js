@@ -86,7 +86,7 @@ async function callHuggingFace(userMessage, history = []) {
 // ------------------------------------------------------
 // ENDPOINT PRINCIPAL
 // ------------------------------------------------------
-app.post("https://cv-2uob.onrender.com/api/chat", async (req, res) => {
+app.post("/api/chat", async (req, res) => {
   try {
     const { message, history = [] } = req.body;
 
