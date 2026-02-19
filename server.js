@@ -1,120 +1,121 @@
-import express from 'express';
-import axios from 'axios';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import express from "express";
+import axios from "axios";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+import { InferenceClient } from "@huggingface/inference";
+import { JSDOM } from "jsdom";
 
-dotenv.config();
-
-const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Cargar .env.local en desarrollo, .env en producción
+const envFile = process.env.NODE_ENV === "production" ? ".env" : ".env.local";
+const envPath = path.join(__dirname, "..", envFile);
+dotenv.config({ path: envPath });
+
+console.log("🔍 Cargando desde:", envPath);
+console.log("✅ Token HF:", process.env.HUGGINGFACE_API_KEY ? "Cargado" : "❌ NO CARGADO");
+console.log("✅ Token OpenAI:", process.env.OPENAI_API_KEY ? "Cargado" : "❌ NO CARGADO");
+console.log("🤖 Proveedor:", process.env.AI_PROVIDER);
+
+const app = express();
 app.use(express.static(__dirname));
 app.use(express.json());
 
-const API_PROVIDER = process.env.AI_PROVIDER || 'openai';
+const API_PROVIDER = process.env.AI_PROVIDER || "openai";
 
-// Contexto del perfil de Ignacio
-const PROFILE_CONTEXT = `Eres un asistente IA que responde sobre el perfil profesional de Ignacio Aguirre:
-- Desarrollador Full Stack con especialización en JavaScript
-- Experiencia en Angular, Laravel, Java
-- Tech Lead Junior, Analista Técnico, Consultor Tecnológico
-- Habilidades: Liderazgo, comunicación, resolución de problemas
-- Educación: Desarrollo de Aplicaciones Web (2025)
-- Idiomas: Español (Nativo), Inglés (Fluido)
-- Ubicación: Sevilla, España
+// ------------------------------------------------------
+// CARGAR CONTENIDO DE TU PORTFOLIO COMO CONTEXTO
+// ------------------------------------------------------
+let PORTFOLIO_CONTEXT = "No se pudo cargar el portfolio.";
 
-Responde de forma concisa y profesional sobre su experiencia y habilidades.`;
-
-async function callOpenAI(userMessage) {
+async function loadPortfolio() {
   try {
-    const response = await axios.post(
-      'https://api.openai.com/v1/chat/completions',
-      {
-        model: 'gpt-3.5-turbo',
-        messages: [
-          { role: 'system', content: PROFILE_CONTEXT },
-          { role: 'user', content: userMessage }
-        ],
-        max_tokens: 150,
-        temperature: 0.7
-      },
-      {
-        headers: { 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}` }
-      }
-    );
-    return response.data.choices[0].message.content;
+    console.log("🌐 Cargando contenido del portfolio...");
+
+    const html = await axios.get("https://nacho-ag82.github.io/CV").then(r => r.data);
+    const dom = new JSDOM(html);
+    const text = dom.window.document.body.textContent;
+
+    PORTFOLIO_CONTEXT = `
+Eres un asistente IA que responde sobre el perfil profesional de Ignacio Aguirre.
+Usa esta información extraída de su portfolio web:
+
+${text}
+
+Responde de forma concisa, profesional y basada en estos datos.
+    `;
+
+    console.log("✅ Portfolio cargado correctamente.");
   } catch (error) {
-    console.error('OpenAI Error:', error.message);
+    console.error("❌ Error cargando portfolio:", error.message);
+  }
+}
+
+await loadPortfolio();
+
+// ------------------------------------------------------
+// HUGGING FACE (NUEVO CLIENTE OFICIAL)
+// ------------------------------------------------------
+const hf = new InferenceClient(process.env.HUGGINGFACE_API_KEY);
+
+async function callHuggingFace(userMessage, history = []) {
+  try {
+    console.log("📨 Llamando a Hugging Face...");
+
+    const response = await hf.chatCompletion({
+      model: "meta-llama/Llama-3.2-1B-Instruct",
+      messages: [
+        { role: "system", content: PORTFOLIO_CONTEXT },
+        ...history.slice(-6),
+        { role: "user", content: userMessage },
+      ],
+      max_tokens: 200,
+      temperature: 0.7,
+    });
+
+    return response.choices[0].message.content;
+  } catch (error) {
+    console.error("❌ HF Error:", error.message);
     throw error;
   }
 }
 
-async function callHuggingFace(userMessage) {
-  try {
-    const response = await axios.post(
-      'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1',
-      { inputs: `${PROFILE_CONTEXT}\n\nUsuario: ${userMessage}\n\nAsistente:` },
-      {
-        headers: { 'Authorization': `Bearer ${process.env.HUGGINGFACE_API_KEY}` }
-      }
-    );
-    return response.data[0].generated_text.split('Asistente:')[1]?.trim() || 'Disculpa, no pude procesar tu pregunta.';
-  } catch (error) {
-    console.error('Hugging Face Error:', error.message);
-    throw error;
-  }
-}
 
-async function callGemini(userMessage) {
-  try {
-    const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.GEMINI_API_KEY}`,
-      {
-        contents: [{
-          parts: [{
-            text: `${PROFILE_CONTEXT}\n\nUsuario: ${userMessage}`
-          }]
-        }]
-      }
-    );
-    return response.data.candidates[0].content.parts[0].text;
-  } catch (error) {
-    console.error('Gemini Error:', error.message);
-    throw error;
-  }
-}
 
-app.post('/api/chat', async (req, res) => {
+// ------------------------------------------------------
+// ENDPOINT PRINCIPAL
+// ------------------------------------------------------
+app.post("https://cv-2uob.onrender.com/api/chat", async (req, res) => {
   try {
-    const { message, language } = req.body;
+    const { message, history = [] } = req.body;
 
     if (!message || message.trim().length === 0) {
-      return res.status(400).json({ error: 'Mensaje vacío' });
+      return res.status(400).json({ error: "Mensaje vacío" });
     }
+
+    console.log("📨 Mensaje recibido:", message);
 
     let response;
 
     switch (API_PROVIDER) {
-      case 'huggingface':
-        response = await callHuggingFace(message);
+      case "huggingface":
+        response = await callHuggingFace(message, history);
         break;
-      case 'gemini':
-        response = await callGemini(message);
-        break;
-      case 'openai':
-      default:
-        response = await callOpenAI(message);
     }
 
     res.json({ response });
   } catch (error) {
-    res.status(500).json({ error: 'Error procesando la solicitud' });
+    console.error("❌ Error en /api/chat:", error.message);
+    res.status(500).json({ error: "Usando respuestas locales" });
   }
 });
 
+// ------------------------------------------------------
+// 6. SERVIDOR
+// ------------------------------------------------------
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor ejecutándose en puerto ${PORT}`);
-  console.log(`Usando proveedor: ${API_PROVIDER}`);
+  console.log(`\n🚀 Servidor en http://localhost:${PORT}`);
+  console.log(`Proveedor: ${API_PROVIDER}\n`);
 });

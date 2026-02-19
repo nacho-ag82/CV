@@ -48,6 +48,8 @@ const aiKnowledgeBase = {
   }
 };
 
+let conversationHistory = [];
+
 function getLocalAIResponse(question, language = 'es') {
   const kb = aiKnowledgeBase[language] || aiKnowledgeBase.es;
   const q = question.toLowerCase();
@@ -104,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = chatInput.value.trim();
     if (!input) return;
 
+    // Agregar mensaje del usuario al historial
+    conversationHistory.push({ role: 'user', content: input });
     addMessage(input, true);
     chatInput.value = '';
     sendBtn.disabled = true;
@@ -116,21 +120,28 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input, language: lang })
+        body: JSON.stringify({ 
+          message: input, 
+          language: lang,
+          history: conversationHistory 
+        })
       });
 
       if (response.ok) {
         const data = await response.json();
+        conversationHistory.push({ role: 'assistant', content: data.response });
         loadingMsg.remove();
         setTimeout(() => addMessage(data.response, false), 300);
       } else {
-        throw new Error('Server error');
+        // Si el servidor retorna error (incluyendo 429), usar fallback local
+        throw new Error(`Server error: ${response.status}`);
       }
     } catch (error) {
-      // Fallback a respuestas locales si el servidor no está disponible
-      console.log('Usando modo local (servidor no disponible)');
+      // Fallback a respuestas locales si hay cualquier error
+      console.log('⚠️ Error del servidor, usando modo local:', error.message);
       loadingMsg.remove();
       const localResponse = getLocalAIResponse(input, lang);
+      conversationHistory.push({ role: 'assistant', content: localResponse });
       setTimeout(() => addMessage(localResponse, false), 300);
     } finally {
       sendBtn.disabled = false;
