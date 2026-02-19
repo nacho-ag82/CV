@@ -5,6 +5,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { InferenceClient } from "@huggingface/inference";
 import { JSDOM } from "jsdom";
+import cors from "cors";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -19,6 +20,13 @@ console.log("✅ Token OpenAI:", process.env.OPENAI_API_KEY ? "Cargado" : "❌ N
 console.log("🤖 Proveedor:", process.env.AI_PROVIDER);
 
 const app = express();
+
+app.use(cors({
+  origin: "https://nacho-ag82.github.io",   // tu GitHub Pages
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}));
+
 app.use(express.static(__dirname));
 app.use(express.json());
 
