@@ -23,9 +23,11 @@ const app = express();
 
 app.use(cors({
   origin: "https://nacho-ag82.github.io",   // tu GitHub Pages
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"]
 }));
+app.options("*", cors());
+
 
 app.use(express.static(__dirname));
 app.use(express.json());
