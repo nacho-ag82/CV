@@ -1,0 +1,24 @@
+{
+  "name": "mi-cv",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "El CV interactivo de Ignacio Aguirre",
+  "main": "cv/server.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development node cv/server.js",
+    "start": "node cv/server.js",
+    "build": "cross-env NODE_ENV=production node cv/server.js"
+  },
+  "dependencies": {
+    "@huggingface/inference": "^4.13.12",
+    "axios": "^1.6.0",
+    "cors": "^2.8.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsdom": "^28.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^1.0.2"
+  }
+}
