@@ -1957,7 +1957,7 @@ body {
   .showcase-indicators {
     display: none !important;
   }
-
+ 
   /* Agregar nota sobre carousel */
   .showcase::before {
     content: "📊 Sección de Proyectos (carrusel interactivo disponible en web)";
@@ -2082,7 +2082,9 @@ body {
     right: 1rem;
     font-size: 0.75rem;
   }
+  
 }
+
 
 @media print {
   .lang-switcher {
@@ -2200,5 +2202,10 @@ body {
 
   .ai-chat {
     max-height: 250px;
+  }
+  .showcase-indicators {
+    margin-top: 95px !important;
+    position: fixed;
+    top: 0;
   }
 }
